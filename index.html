@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Display with React</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@latest/babel.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <script type="text/babel">
+      const OneData = ({ data }) => {
+        return (
+          <div className="card m-5">
+            <img
+              className="card-img-top"
+              src={data.image}
+              alt="Card image cap"
+            />
+            <div className="card-body">
+              <h5 className="card-title">{data.cardTitle}</h5>
+              <p className="card-text">{data.cardDescription}</p>
+              <a href={data.button.url} className="btn btn-primary">
+                {data.button.label}
+              </a>
+            </div>
+          </div>
+        );
+      };
+
+      const AllData = ({ dataList }) => {
+        return (
+          <div>
+            {dataList.map((data, index) => (
+              <OneData data={data} key={index} />
+            ))}
+          </div>
+        );
+      };
+
+      const data = [
+        {
+          image: 'https://i.ytimg.com/vi/kHjzuqq3b44/maxresdefault.jpg',
+          cardTitle: 'Bob Dylan',
+          cardDescription:
+            'Bob Dylan (born Robert Allen Zimmerman, May 24, 1941) is an American singer/songwriter, author, and artist who has been an influential figure in popular music and culture for more than five decades.',
+          button: {
+            url: 'https://en.wikipedia.org/wiki/Bob_Dylan',
+            label: 'Go to Wikipedia',
+          },
+        },
+        {
+          image: 'https://i.ytimg.com/vi/kHjzuqq3b44/maxresdefault.jpg',
+          cardTitle: 'Another Artist',
+          cardDescription:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et leo vestibulum, posuere justo nec, scelerisque ipsum.',
+          button: {
+            url: 'https://example.com',
+            label: 'Visit Example',
+          },
+        },
+      ];
+
+      ReactDOM.render(
+        <AllData dataList={data} />,
+        document.getElementById('root')
+      );
+    </script>
+  </body>
+</html>
